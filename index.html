@@ -131,6 +131,23 @@
             border-radius: 0.375rem;
             font-size: 3rem;
         }
+        .voice-select-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        .voice-select-container label {
+            margin-right: 1rem;
+        }
+		select {
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            background-color: #4a5568;
+            color: #e2e8f0;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200">
@@ -138,6 +155,12 @@
 <div class="container mx-auto p-8">
     <h1 class="text-4xl font-bold mb-6 text-center">Lista dodatków do gry Crusader Kings III</h1>
     <p class="text-lg text-center mb-10 text-gray-400">Poniżej znajdziesz dodatki pogrupowane na kategorie. Kliknij w tytuł, aby rozwinąć lub zwinąć opis.</p>
+
+    <!-- Dodanie wyboru głosu TTS -->
+    <div class="voice-select-container">
+        <label for="voiceSelect">Wybierz głos Lektora:</label>
+        <select id="voiceSelect"></select>
+    </div>
 
     <!-- Duże Rozszerzenia (Major Expansions) -->
     <div class="dlc-section">
@@ -150,8 +173,7 @@
                     <div class="dlc-icon">🏛️</div>
                     <p class="text-gray-400">To jedno z największych rozszerzeń, które dodaje w pełni <b>trójwymiarowy, konfigurowalny pokój tronowy</b>. Gracz, jako władca, może teraz osobiście prowadzić audiencje, słuchać petycji i osądzać swoich wasali. Rozszerzenie wprowadza też system artefaktów i dworskiego splendoru. Co więcej, możesz <b>tworzyć nowe, unikatowe kultury</b>, mieszając cechy istniejących, lub zmieniać te, które już posiadasz.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Royal Court')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Royal Court')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -162,8 +184,7 @@
                     <div class="dlc-icon">🏇</div>
                     <p class="text-gray-400">Ten dodatek skupia się na aktywnościach i wydarzeniach w świecie gry. Wprowadza rozbudowany <b>system podróży</b>, pozwalający na organizowanie wielkich, skomplikowanych przedsięwzięć, takich jak <b>turnieje rycerskie, wielkie polowania czy królewskie wesela</b>. Dodaje też system <b>odznaczeń</b> dla twoich rycerzy, umożliwiając im specjalizację i rozwój.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Tours & Tournaments')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Tours & Tournaments')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -174,8 +195,7 @@
                     <div class="dlc-icon">💀</div>
                     <p class="text-gray-400">Rozszerzenie wprowadzające potężne <b>plagi i zarazy</b>, takie jak czarna śmierć, które mogą dziesiątkować twoje królestwo. Dodaje też system <b>legend dynastycznych</b>, które możesz tworzyć i opowiadać, aby zwiększyć prestiż swojej rodziny i zyskać potężne bonusy w całym imperium.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Legends of the Dead')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Legends of the Dead')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -186,8 +206,7 @@
                     <div class="dlc-icon">👑</div>
                     <p class="text-gray-400">Ten dodatek mocno zmienia zasady gry dla cesarzy i władców. Wprowadza możliwość bycia <b>władcą bez ziemi</b>, a także nowe mechaniki inspekcji i poszukiwania skarbów. Pozwala na bardziej dynamiczną i elastyczną rozgrywkę, dając nowe ścieżki do zdobycia władzy i wpływów.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Roads to Power')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Roads to Power')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
     </div>
@@ -203,8 +222,7 @@
                     <div class="dlc-icon">⚔️</div>
                     <p class="text-gray-400">Dodatek skupiający się na Wikingach i Skandynawii, dodający unikalne mechaniki <b>najazdów</b>, nowe <b>dziedzictwa</b> i wydarzenia.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Northern Lords')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Northern Lords')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -215,8 +233,7 @@
                     <div class="dlc-icon">🇪🇸</div>
                     <p class="text-gray-400">Wprowadza mechanikę <b>"Zmagań"</b> (Struggle) na Półwyspie Iberyjskim, skupiając się na historycznym konflikcie między religiami.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Fate of Iberia')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Fate of Iberia')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -227,8 +244,7 @@
                     <div class="dlc-icon">🇮🇷</div>
                     <p class="text-gray-400">Pakiet koncentrujący się na regionie Persji, z nową mechaniką <b>"Zmagań"</b> po upadku kalifatu Abbasydów.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Legacy of Persia')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Legacy of Persia')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
         
@@ -239,8 +255,7 @@
                     <div class="dlc-icon">🛖</div>
                     <p class="text-gray-400">Ten pakiet skupia się na Mongołach i innych kulturach stepowych, dodając nowe mechaniki i stroje dla tych regionów.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Khans of the Steppe')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Khans of the Steppe')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -251,8 +266,7 @@
                     <div class="dlc-icon">👑</div>
                     <p class="text-gray-400">Ten pakiet wprowadza do gry rozbudowany system koronacji, gdzie można koronować się i swoich wasali, by zyskać prestiż i legitymizację.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Coronations')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Coronations')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -263,8 +277,7 @@
                     <div class="dlc-icon">🏯</div>
                     <p class="text-gray-400">Ten pakiet dodaje nowe mechaniki dotyczące cesarstwa chińskiego i jego wpływów na świat gry.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'All Under Heaven')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'All Under Heaven')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
     </div>
@@ -280,8 +293,7 @@
                     <div class="dlc-icon">🫂</div>
                     <p class="text-gray-400">Pakiet wydarzeń, który dodaje nowe opcje interakcji między postaciami, budując relacje oparte na <b>przyjaźni i rywalizacji</b>.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Friends & Foes')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Friends & Foes')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -292,8 +304,7 @@
                     <div class="dlc-icon">👨‍🏫</div>
                     <p class="text-gray-400">Dodaje nowe wydarzenia i mechaniki związane z <b>wychowywaniem i edukacją dzieci</b> w grze.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Wards & Wardens')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Wards & Wardens')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
         
@@ -304,8 +315,7 @@
                     <div class="dlc-icon">🚶</div>
                     <p class="text-gray-400">Rozbudowuje rozgrywkę dla postaci bez ziemi, wprowadzając nowe możliwości i wydarzenia dla <b>wędrujących lordów</b>.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Wandering Nobles')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Wandering Nobles')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
     </div>
@@ -321,8 +331,7 @@
                     <div class="dlc-icon">🪖</div>
                     <p class="text-gray-400">Pakiet dodający nowe, historycznie inspirowane stroje dla postaci w <b>Świętym Cesarstwie Rzymskim</b>.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Garments of the Holy Roman Empire')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Garments of the Holy Roman Empire')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -333,8 +342,7 @@
                     <div class="dlc-icon">🕌</div>
                     <p class="text-gray-400">Dodatek kosmetyczny wprowadzający nowe <b>szaty i ubiory</b> inspirowane kulturą arabską.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Fashion of the Abbasid Court')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Fashion of the Abbasid Court')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -345,8 +353,7 @@
                     <div class="dlc-icon">🔱</div>
                     <p class="text-gray-400">Pakiet kosmetyczny, który wprowadza stroje i <b>regalia</b> inspirowane kulturą bizantyjską.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Elegance of the Empire')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Elegance of the Empire')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
         
@@ -357,8 +364,7 @@
                     <div class="dlc-icon">👳‍♂️</div>
                     <p class="text-gray-400">Pakiet dodający nowe <b>stroje i ubiory</b> inspirowane kulturą Północnej Afryki.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Content Creator Pack: North African Attire')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Content Creator Pack: North African Attire')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -369,8 +375,7 @@
                     <div class="dlc-icon">⚜️</div>
                     <p class="text-gray-400">Pakiet kosmetyczny dodający nowe ubiory inspirowane modą <b>królewskiego dworu Kapetyngów</b>.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Couture of the Capets')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Couture of the Capets')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -381,8 +386,7 @@
                     <div class="dlc-icon">📖</div>
                     <p class="text-gray-400">Cyfrowy komiks osadzony w świecie <b>Crusader Kings III</b>.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Many Roads to Power - Comic Book')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Many Roads to Power - Comic Book')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -393,8 +397,7 @@
                     <div class="dlc-icon">🇵🇱</div>
                     <p class="text-gray-400">Pakiet dodający nowe <b>stroje i ubiory</b> inspirowane kulturą Słowian Zachodnich.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Content Creator Pack West Slavic Attire')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Content Creator Pack West Slavic Attire')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -405,8 +408,7 @@
                     <div class="dlc-icon">🏰</div>
                     <p class="text-gray-400">Dodatek kosmetyczny, który wprowadza nowe, unikalne <b>monumenty</b> do budowy w świecie gry.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Content Creator Pack: Medieval Monuments')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Content Creator Pack: Medieval Monuments')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
         
@@ -417,8 +419,7 @@
                     <div class="dlc-icon">🧊</div>
                     <p class="text-gray-400">Pakiet dodający nowe stroje inspirowane <b>kulturą arktyczną</b>.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Content Creator Pack: Arctic Attire')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Content Creator Pack: Arctic Attire')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
 
@@ -429,8 +430,7 @@
                     <div class="dlc-icon">👑</div>
                     <p class="text-gray-400">Pakiet kosmetyczny, który dodaje nowe <b>korony, regalia i inne insygnia</b> władzy.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Crowns of the World')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Crowns of the World')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
     </div>
@@ -446,8 +446,7 @@
                     <div class="dlc-icon">📦</div>
                     <p class="text-gray-400">Sezonowa przepustka, która zawiera kilka <b>dodatków i pakietów kosmetycznych</b> w niższej cenie.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Expansion Pass')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Expansion Pass')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
         
@@ -458,8 +457,7 @@
                     <div class="dlc-icon">📜</div>
                     <p class="text-gray-400">Trzeci duży pakiet sezonowy, który zawiera kilka <b>rozszerzeń i pomniejszych pakietów</b>.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Chapter III')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Chapter III')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
         
@@ -470,156 +468,114 @@
                     <div class="dlc-icon">📜</div>
                     <p class="text-gray-400">Czwarty duży pakiet sezonowy, który zawiera kilka <b>rozszerzeń i pomniejszych pakietów</b>.</p>
                 </div>
-                <button class="gemini-button" onclick="summarize(event, 'Chapter IV')">✨ Podsumuj</button>
-                <button class="gemini-button" onclick="generateTTS(event, 'Chapter IV')">✨ Odtwórz Opis</button>
+                <button class="gemini-button speak-button">✨ Odtwórz Opis</button>
             </div>
         </div>
     </div>
 </div>
 
+
 <script>
-    const dlcItems = document.querySelectorAll('.dlc-item h3');
+    const dlcHeaders = document.querySelectorAll('.dlc-header');
+    const speakButtons = document.querySelectorAll('.speak-button');
+    const voiceSelect = document.getElementById('voiceSelect');
+    let voices = [];
+
+    // Funkcja do wypełniania listy głosów
+    function populateVoiceList() {
+        voices = speechSynthesis.getVoices();
+        voiceSelect.innerHTML = '';
+        
+        const sortedVoices = [...voices].sort((a, b) => {
+            const isAPL = a.lang.startsWith('pl');
+            const isBPL = b.lang.startsWith('pl');
+            if (isAPL && !isBPL) return -1;
+            if (!isAPL && isBPL) return 1;
+            return 0;
+        });
+
+        sortedVoices.forEach(voice => {
+            const option = document.createElement('option');
+            option.textContent = `${voice.name} (${voice.lang})`;
+            option.setAttribute('data-lang', voice.lang);
+            option.setAttribute('data-name', voice.name);
+            voiceSelect.appendChild(option);
+        });
+
+        // Ustaw domyślny wybór na pierwszy polski głos, jeśli istnieje
+        const defaultPolishVoice = sortedVoices.find(voice => voice.lang.startsWith('pl'));
+        if (defaultPolishVoice) {
+            voiceSelect.value = `${defaultPolishVoice.name} (${defaultPolishVoice.lang})`;
+        } else if (voices.length > 0) {
+            // Jeśli nie ma polskiego, wybierz domyślny systemowy
+            const defaultSystemVoice = voices.find(voice => voice.default);
+            if(defaultSystemVoice) {
+                voiceSelect.value = `${defaultSystemVoice.name} (${defaultSystemVoice.lang})`;
+            }
+        }
+    }
+    
+    if ('speechSynthesis' in window) {
+        speechSynthesis.onvoiceschanged = populateVoiceList;
+        populateVoiceList();
+    } else {
+        console.error('Twoja przeglądarka nie obsługuje Web Speech API.');
+    }
+
+    // Obsługa rozwijania/zwijania
+    dlcHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const dlcItem = header.closest('.dlc-item');
+            const content = dlcItem.querySelector('.dlc-content');
+            
+            if (dlcItem.classList.contains('is-open')) {
+                // Zwijanie
+                dlcItem.classList.remove('is-open');
+                content.style.height = '0';
+                content.style.padding = '0 1.5rem';
+            } else {
+                // Rozwijanie
+                dlcItem.classList.add('is-open');
+                content.style.height = content.scrollHeight + 'px';
+                content.style.padding = '1.5rem';
+            }
+        });
+    });
+
+    // Obsługa TTS
+    speakButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.stopPropagation(); // Zapobiega propagacji kliknięcia do dlc-header
+            const dlcItem = button.closest('.dlc-item');
+            const description = dlcItem.querySelector('p:not(.text-sm)').textContent.trim();
+
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(description);
+                const selectedVoiceName = voiceSelect.selectedOptions[0].getAttribute('data-name');
+                
+                for (let i = 0; i < voices.length; i++) {
+                    if (voices[i].name === selectedVoiceName) {
+                        utterance.voice = voices[i];
+                    }
+                }
+                
+                speechSynthesis.speak(utterance);
+            } else {
+                console.error('Twoja przeglądarka nie obsługuje Web Speech API.');
+            }
+        });
+    });
+	
+    // API calls
+	
+	    const dlcItems = document.querySelectorAll('.dlc-item h3');
     dlcItems.forEach(item => {
         item.addEventListener('click', () => {
             const content = item.nextElementSibling;
             content.classList.toggle('expanded');
         });
     });
-
-    // Dialog handling
-    function showDialog(title, content) {
-        const dialog = document.createElement('div');
-        dialog.className = 'dialog';
-        dialog.innerHTML = `
-            <button class="close-button" onclick="closeDialog()">&times;</button>
-            <h4 class="text-xl font-bold mb-4">${title}</h4>
-            <p>${content}</p>
-        `;
-
-        const overlay = document.createElement('div');
-        overlay.className = 'overlay';
-        overlay.onclick = closeDialog;
-
-        document.body.appendChild(overlay);
-        document.body.appendChild(dialog);
-    }
-
-    function closeDialog() {
-        const dialog = document.querySelector('.dialog');
-        const overlay = document.querySelector('.overlay');
-        if (dialog) dialog.remove();
-        if (overlay) overlay.remove();
-    }
-
-    // API calls
-    async function summarize(event, dlcName) {
-        const button = event.target;
-        button.disabled = true;
-        button.innerHTML = '<span class="loading-spinner"></span> Podsumowuję...';
-
-        try {
-            const systemPrompt = "Jesteś ekspertem od gier wideo. Podsumuj następujący opis dodatku w 2-3 zwięzłych zdaniach. Skup się na najważniejszych cechach.";
-            const dlcContent = button.closest('.dlc-content').querySelector('p').textContent;
-            const userQuery = dlcContent;
-
-            const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
-                systemInstruction: { parts: [{ text: systemPrompt }] },
-            };
-            
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-            
-            let response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-            let result = await response.json();
-            
-            let summaryText = result.candidates[0].content.parts[0].text;
-            showDialog('Podsumowanie', summaryText);
-
-        } catch (error) {
-            console.error('Błąd podczas podsumowywania:', error);
-            showDialog('Błąd', 'Wystąpił błąd podczas podsumowywania. Spróbuj ponownie.');
-        } finally {
-            button.disabled = false;
-            button.innerHTML = '✨ Podsumuj';
-        }
-    }
-
-    async function generateTTS(event, dlcName) {
-        const button = event.target;
-        button.disabled = true;
-        button.innerHTML = '<span class="loading-spinner"></span> Odtwarzam...';
-
-        try {
-            const dlcContent = button.closest('.dlc-content').querySelector('p').textContent;
-            const payload = {
-                contents: [{ parts: [{ text: dlcContent }] }],
-                generationConfig: {
-                    responseModalities: ["AUDIO"],
-                    speechConfig: {
-                        voiceConfig: {
-                            prebuiltVoiceConfig: { voiceName: "Fenrir" }
-                        }
-                    }
-                },
-                model: "gemini-2.5-flash-preview-tts"
-            };
-            
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
-            
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            const result = await response.json();
-            const part = result?.candidates?.[0]?.content?.parts?.[0];
-            const audioData = part?.inlineData?.data;
-            const mimeType = part?.inlineData?.mimeType;
-
-            if (audioData && mimeType && mimeType.startsWith("audio/")) {
-                const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10);
-                const pcmData = base64ToArrayBuffer(audioData);
-                const pcm16 = new Int16Array(pcmData);
-                const wavBlob = pcmToWav(pcm16, sampleRate);
-                const audioUrl = URL.createObjectURL(wavBlob);
-                
-                const audio = new Audio(audioUrl);
-                audio.play();
-
-                audio.onended = () => {
-                    button.disabled = false;
-                    button.innerHTML = '✨ Odtwórz Opis';
-                };
-            } else {
-                showDialog('Błąd odtwarzania', 'Nie można odtworzyć dźwięku. Spróbuj ponownie.');
-            }
-
-        } catch (error) {
-            console.error('Błąd podczas odtwarzania TTS:', error);
-            showDialog('Błąd', 'Wystąpił błąd podczas odtwarzania. Spróbuj ponownie.');
-        } finally {
-            button.disabled = false;
-            button.innerHTML = '✨ Odtwórz Opis';
-        }
-    }
-
-    function base64ToArrayBuffer(base64) {
-        const binaryString = atob(base64);
-        const len = binaryString.length;
-        const bytes = new Uint8Array(len);
-        for (let i = 0; i < len; i++) {
-            bytes[i] = binaryString.charCodeAt(i);
-        }
-        return bytes.buffer;
-    }
-
+	
     function pcmToWav(pcmData, sampleRate) {
         const pcm16 = pcmData;
         const dataLength = pcm16.length * 2;
@@ -632,31 +588,7 @@
             }
         }
 
-        // RIFF chunk descriptor
-        writeString(view, 0, 'RIFF');
-        view.setUint32(4, 36 + dataLength, true);
-        writeString(view, 8, 'WAVE');
 
-        // FMT sub-chunk
-        writeString(view, 12, 'fmt ');
-        view.setUint32(16, 16, true);
-        view.setUint16(20, 1, true); // Audio format (1 = PCM)
-        view.setUint16(22, 1, true); // Number of channels
-        view.setUint32(24, sampleRate, true);
-        view.setUint32(28, sampleRate * 2, true); // Byte rate
-        view.setUint16(32, 2, true); // Block align
-        view.setUint16(34, 16, true); // Bits per sample
-
-        // DATA sub-chunk
-        writeString(view, 36, 'data');
-        view.setUint32(40, dataLength, true);
-
-        // PCM data
-        let offset = 44;
-        for (let i = 0; i < pcm16.length; i++) {
-            view.setInt16(offset, pcm16[i], true);
-            offset += 2;
-        }
 
         return new Blob([view], { type: 'audio/wav' });
     }
