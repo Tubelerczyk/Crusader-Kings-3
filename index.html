@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista dodatków do Crusader Kings III</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .dlc-section {
+            margin-bottom: 2rem;
+        }
+        .dlc-item {
+            background-color: #2d3748;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        .dlc-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #cbd5e0;
+        }
+        h2 {
+            color: #a0aec0;
+            border-bottom: 2px solid #4a5568;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        h3 {
+            color: #e2e8f0;
+            cursor: pointer;
+        }
+        .dlc-content {
+            max-height: 0;
+            padding-top: 0;
+            transition: max-height 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding-top 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+        .dlc-content.expanded {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+        .gemini-button {
+            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            background-color: #4c51bf;
+            color: #ffffff;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .gemini-button:hover {
+            background-color: #3f479d;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            width: 1rem;
+            height: 1rem;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #2d3748;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+        .close-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #a0aec0;
+            cursor: pointer;
+        }
+        .dlc-icon {
+            width: 100px;
+            height: 100px;
+            min-width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #4a5568;
+            border-radius: 0.375rem;
+            font-size: 3rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+<div class="container mx-auto p-8">
+    <h1 class="text-4xl font-bold mb-6 text-center">Lista dodatków do gry Crusader Kings III</h1>
+    <p class="text-lg text-center mb-10 text-gray-400">Poniżej znajdziesz dodatki pogrupowane na kategorie. Kliknij w tytuł, aby rozwinąć lub zwinąć opis.</p>
+
+    <!-- Duże Rozszerzenia (Major Expansions) -->
+    <div class="dlc-section">
+        <h2 class="text-3xl font-bold mb-4">Duże Rozszerzenia</h2>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Royal Court (Królewski Dwór)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🏛️</div>
+                    <p class="text-gray-400">To jedno z największych rozszerzeń, które dodaje w pełni <b>trójwymiarowy, konfigurowalny pokój tronowy</b>. Gracz, jako władca, może teraz osobiście prowadzić audiencje, słuchać petycji i osądzać swoich wasali. Rozszerzenie wprowadza też system artefaktów i dworskiego splendoru. Co więcej, możesz <b>tworzyć nowe, unikatowe kultury</b>, mieszając cechy istniejących, lub zmieniać te, które już posiadasz.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Royal Court')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Royal Court')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Tours & Tournaments (Wycieczki i Turnieje)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🏇</div>
+                    <p class="text-gray-400">Ten dodatek skupia się na aktywnościach i wydarzeniach w świecie gry. Wprowadza rozbudowany <b>system podróży</b>, pozwalający na organizowanie wielkich, skomplikowanych przedsięwzięć, takich jak <b>turnieje rycerskie, wielkie polowania czy królewskie wesela</b>. Dodaje też system <b>odznaczeń</b> dla twoich rycerzy, umożliwiając im specjalizację i rozwój.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Tours & Tournaments')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Tours & Tournaments')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Legends of the Dead (Legendy Umarłych)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">💀</div>
+                    <p class="text-gray-400">Rozszerzenie wprowadzające potężne <b>plagi i zarazy</b>, takie jak czarna śmierć, które mogą dziesiątkować twoje królestwo. Dodaje też system <b>legend dynastycznych</b>, które możesz tworzyć i opowiadać, aby zwiększyć prestiż swojej rodziny i zyskać potężne bonusy w całym imperium.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Legends of the Dead')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Legends of the Dead')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Roads to Power (Drogi do Władzy)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">👑</div>
+                    <p class="text-gray-400">Ten dodatek mocno zmienia zasady gry dla cesarzy i władców. Wprowadza możliwość bycia <b>władcą bez ziemi</b>, a także nowe mechaniki inspekcji i poszukiwania skarbów. Pozwala na bardziej dynamiczną i elastyczną rozgrywkę, dając nowe ścieżki do zdobycia władzy i wpływów.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Roads to Power')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Roads to Power')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pakiety tematyczne (Flavor Packs) -->
+    <div class="dlc-section">
+        <h2 class="text-3xl font-bold mb-4">Pakiety Tematyczne</h2>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Northern Lords (Północni Lordowie)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">⚔️</div>
+                    <p class="text-gray-400">Dodatek skupiający się na Wikingach i Skandynawii, dodający unikalne mechaniki <b>najazdów</b>, nowe <b>dziedzictwa</b> i wydarzenia.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Northern Lords')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Northern Lords')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Fate of Iberia (Los Iberii)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🇪🇸</div>
+                    <p class="text-gray-400">Wprowadza mechanikę <b>"Zmagań"</b> (Struggle) na Półwyspie Iberyjskim, skupiając się na historycznym konflikcie między religiami.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Fate of Iberia')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Fate of Iberia')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Legacy of Persia (Dziedzictwo Persji)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🇮🇷</div>
+                    <p class="text-gray-400">Pakiet koncentrujący się na regionie Persji, z nową mechaniką <b>"Zmagań"</b> po upadku kalifatu Abbasydów.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Legacy of Persia')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Legacy of Persia')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+        
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Khans of the Steppe</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🛖</div>
+                    <p class="text-gray-400">Ten pakiet skupia się na Mongołach i innych kulturach stepowych, dodając nowe mechaniki i stroje dla tych regionów.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Khans of the Steppe')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Khans of the Steppe')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Coronations</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">👑</div>
+                    <p class="text-gray-400">Ten pakiet wprowadza do gry rozbudowany system koronacji, gdzie można koronować się i swoich wasali, by zyskać prestiż i legitymizację.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Coronations')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Coronations')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">All Under Heaven</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🏯</div>
+                    <p class="text-gray-400">Ten pakiet dodaje nowe mechaniki dotyczące cesarstwa chińskiego i jego wpływów na świat gry.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'All Under Heaven')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'All Under Heaven')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pakiety wydarzeń -->
+    <div class="dlc-section">
+        <h2 class="text-3xl font-bold mb-4">Pakiety Wydarzeń</h2>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Friends & Foes (Przyjaciele i Wrogowie)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🫂</div>
+                    <p class="text-gray-400">Pakiet wydarzeń, który dodaje nowe opcje interakcji między postaciami, budując relacje oparte na <b>przyjaźni i rywalizacji</b>.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Friends & Foes')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Friends & Foes')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Wards & Wardens (Opiekunowie i Wychowankowie)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">👨‍🏫</div>
+                    <p class="text-gray-400">Dodaje nowe wydarzenia i mechaniki związane z <b>wychowywaniem i edukacją dzieci</b> w grze.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Wards & Wardens')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Wards & Wardens')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+        
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Wandering Nobles (Wędrujący Szlachcice)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🚶</div>
+                    <p class="text-gray-400">Rozbudowuje rozgrywkę dla postaci bez ziemi, wprowadzając nowe możliwości i wydarzenia dla <b>wędrujących lordów</b>.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Wandering Nobles')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Wandering Nobles')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pakiety kosmetyczne -->
+    <div class="dlc-section">
+        <h2 class="text-3xl font-bold mb-4">Pakiety Kosmetyczne</h2>
+        
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Garments of the Holy Roman Empire (Szaty Świętego Cesarstwa Rzymskiego)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🪖</div>
+                    <p class="text-gray-400">Pakiet dodający nowe, historycznie inspirowane stroje dla postaci w <b>Świętym Cesarstwie Rzymskim</b>.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Garments of the Holy Roman Empire')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Garments of the Holy Roman Empire')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Fashion of the Abbasid Court (Moda Dworu Abbasydów)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🕌</div>
+                    <p class="text-gray-400">Dodatek kosmetyczny wprowadzający nowe <b>szaty i ubiory</b> inspirowane kulturą arabską.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Fashion of the Abbasid Court')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Fashion of the Abbasid Court')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Elegance of the Empire (Elegancja Cesarstwa)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🔱</div>
+                    <p class="text-gray-400">Pakiet kosmetyczny, który wprowadza stroje i <b>regalia</b> inspirowane kulturą bizantyjską.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Elegance of the Empire')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Elegance of the Empire')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+        
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Content Creator Pack: North African Attire (Pakiet Twórcy Treści: Stroje Północnej Afryki)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">👳‍♂️</div>
+                    <p class="text-gray-400">Pakiet dodający nowe <b>stroje i ubiory</b> inspirowane kulturą Północnej Afryki.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Content Creator Pack: North African Attire')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Content Creator Pack: North African Attire')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Couture of the Capets (Haute couture Kapetyngów)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">⚜️</div>
+                    <p class="text-gray-400">Pakiet kosmetyczny dodający nowe ubiory inspirowane modą <b>królewskiego dworu Kapetyngów</b>.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Couture of the Capets')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Couture of the Capets')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Many Roads to Power - Comic Book</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">📖</div>
+                    <p class="text-gray-400">Cyfrowy komiks osadzony w świecie <b>Crusader Kings III</b>.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Many Roads to Power - Comic Book')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Many Roads to Power - Comic Book')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Content Creator Pack West Slavic Attire (Pakiet Twórcy Treści: Stroje Słowian Zachodnich)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🇵🇱</div>
+                    <p class="text-gray-400">Pakiet dodający nowe <b>stroje i ubiory</b> inspirowane kulturą Słowian Zachodnich.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Content Creator Pack West Slavic Attire')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Content Creator Pack West Slavic Attire')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Content Creator Pack: Medieval Monuments (Pakiet Twórcy Treści: Średniowieczne Monumenty)</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🏰</div>
+                    <p class="text-gray-400">Dodatek kosmetyczny, który wprowadza nowe, unikalne <b>monumenty</b> do budowy w świecie gry.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Content Creator Pack: Medieval Monuments')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Content Creator Pack: Medieval Monuments')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+        
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Content Creator Pack: Arctic Attire</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">🧊</div>
+                    <p class="text-gray-400">Pakiet dodający nowe stroje inspirowane <b>kulturą arktyczną</b>.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Content Creator Pack: Arctic Attire')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Content Creator Pack: Arctic Attire')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Crowns of the World</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">👑</div>
+                    <p class="text-gray-400">Pakiet kosmetyczny, który dodaje nowe <b>korony, regalia i inne insygnia</b> władzy.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Crowns of the World')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Crowns of the World')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pakiety sezonowe -->
+    <div class="dlc-section">
+        <h2 class="text-3xl font-bold mb-4">Pakiety Sezonowe</h2>
+
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Expansion Pass</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">📦</div>
+                    <p class="text-gray-400">Sezonowa przepustka, która zawiera kilka <b>dodatków i pakietów kosmetycznych</b> w niższej cenie.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Expansion Pass')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Expansion Pass')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+        
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Chapter III</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">📜</div>
+                    <p class="text-gray-400">Trzeci duży pakiet sezonowy, który zawiera kilka <b>rozszerzeń i pomniejszych pakietów</b>.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Chapter III')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Chapter III')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+        
+        <div class="dlc-item">
+            <h3 class="text-2xl font-semibold mb-2">Chapter IV</h3>
+            <div class="dlc-content">
+                <div class="flex items-start space-x-4">
+                    <div class="dlc-icon">📜</div>
+                    <p class="text-gray-400">Czwarty duży pakiet sezonowy, który zawiera kilka <b>rozszerzeń i pomniejszych pakietów</b>.</p>
+                </div>
+                <button class="gemini-button" onclick="summarize(event, 'Chapter IV')">✨ Podsumuj</button>
+                <button class="gemini-button" onclick="generateTTS(event, 'Chapter IV')">✨ Odtwórz Opis</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const dlcItems = document.querySelectorAll('.dlc-item h3');
+    dlcItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const content = item.nextElementSibling;
+            content.classList.toggle('expanded');
+        });
+    });
+
+    // Dialog handling
+    function showDialog(title, content) {
+        const dialog = document.createElement('div');
+        dialog.className = 'dialog';
+        dialog.innerHTML = `
+            <button class="close-button" onclick="closeDialog()">&times;</button>
+            <h4 class="text-xl font-bold mb-4">${title}</h4>
+            <p>${content}</p>
+        `;
+
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        overlay.onclick = closeDialog;
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(dialog);
+    }
+
+    function closeDialog() {
+        const dialog = document.querySelector('.dialog');
+        const overlay = document.querySelector('.overlay');
+        if (dialog) dialog.remove();
+        if (overlay) overlay.remove();
+    }
+
+    // API calls
+    async function summarize(event, dlcName) {
+        const button = event.target;
+        button.disabled = true;
+        button.innerHTML = '<span class="loading-spinner"></span> Podsumowuję...';
+
+        try {
+            const systemPrompt = "Jesteś ekspertem od gier wideo. Podsumuj następujący opis dodatku w 2-3 zwięzłych zdaniach. Skup się na najważniejszych cechach.";
+            const dlcContent = button.closest('.dlc-content').querySelector('p').textContent;
+            const userQuery = dlcContent;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+            };
+            
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            
+            let response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            let result = await response.json();
+            
+            let summaryText = result.candidates[0].content.parts[0].text;
+            showDialog('Podsumowanie', summaryText);
+
+        } catch (error) {
+            console.error('Błąd podczas podsumowywania:', error);
+            showDialog('Błąd', 'Wystąpił błąd podczas podsumowywania. Spróbuj ponownie.');
+        } finally {
+            button.disabled = false;
+            button.innerHTML = '✨ Podsumuj';
+        }
+    }
+
+    async function generateTTS(event, dlcName) {
+        const button = event.target;
+        button.disabled = true;
+        button.innerHTML = '<span class="loading-spinner"></span> Odtwarzam...';
+
+        try {
+            const dlcContent = button.closest('.dlc-content').querySelector('p').textContent;
+            const payload = {
+                contents: [{ parts: [{ text: dlcContent }] }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Fenrir" }
+                        }
+                    }
+                },
+                model: "gemini-2.5-flash-preview-tts"
+            };
+            
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            const part = result?.candidates?.[0]?.content?.parts?.[0];
+            const audioData = part?.inlineData?.data;
+            const mimeType = part?.inlineData?.mimeType;
+
+            if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                const sampleRate = parseInt(mimeType.match(/rate=(\d+)/)[1], 10);
+                const pcmData = base64ToArrayBuffer(audioData);
+                const pcm16 = new Int16Array(pcmData);
+                const wavBlob = pcmToWav(pcm16, sampleRate);
+                const audioUrl = URL.createObjectURL(wavBlob);
+                
+                const audio = new Audio(audioUrl);
+                audio.play();
+
+                audio.onended = () => {
+                    button.disabled = false;
+                    button.innerHTML = '✨ Odtwórz Opis';
+                };
+            } else {
+                showDialog('Błąd odtwarzania', 'Nie można odtworzyć dźwięku. Spróbuj ponownie.');
+            }
+
+        } catch (error) {
+            console.error('Błąd podczas odtwarzania TTS:', error);
+            showDialog('Błąd', 'Wystąpił błąd podczas odtwarzania. Spróbuj ponownie.');
+        } finally {
+            button.disabled = false;
+            button.innerHTML = '✨ Odtwórz Opis';
+        }
+    }
+
+    function base64ToArrayBuffer(base64) {
+        const binaryString = atob(base64);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+        return bytes.buffer;
+    }
+
+    function pcmToWav(pcmData, sampleRate) {
+        const pcm16 = pcmData;
+        const dataLength = pcm16.length * 2;
+        const buffer = new ArrayBuffer(44 + dataLength);
+        const view = new DataView(buffer);
+
+        function writeString(view, offset, string) {
+            for (let i = 0; i < string.length; i++) {
+                view.setUint8(offset + i, string.charCodeAt(i));
+            }
+        }
+
+        // RIFF chunk descriptor
+        writeString(view, 0, 'RIFF');
+        view.setUint32(4, 36 + dataLength, true);
+        writeString(view, 8, 'WAVE');
+
+        // FMT sub-chunk
+        writeString(view, 12, 'fmt ');
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true); // Audio format (1 = PCM)
+        view.setUint16(22, 1, true); // Number of channels
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * 2, true); // Byte rate
+        view.setUint16(32, 2, true); // Block align
+        view.setUint16(34, 16, true); // Bits per sample
+
+        // DATA sub-chunk
+        writeString(view, 36, 'data');
+        view.setUint32(40, dataLength, true);
+
+        // PCM data
+        let offset = 44;
+        for (let i = 0; i < pcm16.length; i++) {
+            view.setInt16(offset, pcm16[i], true);
+            offset += 2;
+        }
+
+        return new Blob([view], { type: 'audio/wav' });
+    }
+</script>
+</body>
+</html>
